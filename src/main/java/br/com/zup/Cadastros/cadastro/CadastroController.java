@@ -39,5 +39,6 @@ public class CadastroController {
         return cadastrosResumoDTO;
     }
 
+    //método delete
 
 }
