@@ -38,7 +38,11 @@ public class CadastroService {
     }
 
     public void deletarCadastro(String cpf) {
+        if(cadastroRepository.existsById(cpf)){
         cadastroRepository.deleteById(cpf);
+        } else {
+            throw new CadastroNaoExisteException();
+        }
     }
 
 }
