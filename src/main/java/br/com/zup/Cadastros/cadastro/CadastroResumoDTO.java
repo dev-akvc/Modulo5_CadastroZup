@@ -12,6 +12,9 @@ public class CadastroResumoDTO {
         this.sobrenome = sobrenome;
     }
 
+    public CadastroResumoDTO() {
+    }
+
     public String getCpf() {
         return cpf;
     }

@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/cadastros")
@@ -23,14 +25,20 @@ public class CadastroController {
         cadastroService.cadastrarPessoa(cadastro);
     }
 
-//    @GetMapping
-//    public List<CadastroResumoDTO> buscarCadastros(@RequestParam boolean moraSozinho, boolean temPet, int idade) {
-//        List<CadastroResumoDTO> cadastrosResumoDTO = new ArrayList<>();
-//        if(cadastroService.buscarCadastros(moraSozinho, temPet, idade)){
-//
-//        }
-//
-//    }
+    @GetMapping
+    public List<CadastroResumoDTO> buscarCadastros(@RequestParam(required = false) Boolean moraSozinho,
+                                                   @RequestParam(required = false) Boolean temPet,
+                                                   @RequestParam(required = false) Integer idade) {
+        List<CadastroResumoDTO> cadastrosResumoDTO = new ArrayList<>();
+
+        for(Cadastro cadastro: cadastroService.buscarCadastros(moraSozinho, temPet, idade)){
+            CadastroResumoDTO resumoDTO = modelMapper.map(cadastro, CadastroResumoDTO.class);
+            cadastrosResumoDTO.add(resumoDTO);
+        }
+
+        return cadastrosResumoDTO;
+
+    }
 
     //método delete
 

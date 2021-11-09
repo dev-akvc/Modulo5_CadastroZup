@@ -22,14 +22,14 @@ public class CadastroService {
 
     }
 
-    public List<Cadastro> buscarCadastros (Boolean moraSozinho, boolean temPet, int idade){
-        if(moraSozinho){
+    public List<Cadastro> buscarCadastros (Boolean moraSozinho, Boolean temPet, Integer idade){
+        if(moraSozinho != null){
             return  cadastroRepository.findAllByMoraSozinho(moraSozinho);
         }
-        if(temPet){
+        if(temPet != null){
             return cadastroRepository.findAllByTemPet(temPet);
         }
-        if(idade != 0){
+        if(idade != null){
             return cadastroRepository.findAllByIdade(idade);
         }
         Iterable<Cadastro> cadastros = cadastroRepository.findAll();
