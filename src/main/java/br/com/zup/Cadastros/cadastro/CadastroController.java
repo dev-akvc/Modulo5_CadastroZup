@@ -35,11 +35,14 @@ public class CadastroController {
             CadastroResumoDTO resumoDTO = modelMapper.map(cadastro, CadastroResumoDTO.class);
             cadastrosResumoDTO.add(resumoDTO);
         }
-
         return cadastrosResumoDTO;
 
     }
 
-    //método delete
+    @DeleteMapping
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletarCadastro(@PathVariable String cpf){
+        cadastroService.deletarCadastro(cpf);
+    }
 
 }

@@ -14,7 +14,7 @@ public class CadastroService {
     LocalDate dataDoCadastro = LocalDate.now();
 
     public void cadastrarPessoa(Cadastro cadastro) {
-        if(cadastroRepository.existsById(cadastro.getCpf())){
+        if (cadastroRepository.existsById(cadastro.getCpf())) {
             throw new CadastroDuplicadoException();
         }
         cadastro.setDataDoCadastro(dataDoCadastro);
@@ -22,20 +22,23 @@ public class CadastroService {
 
     }
 
-    public List<Cadastro> buscarCadastros (Boolean moraSozinho, Boolean temPet, Integer idade){
-        if(moraSozinho != null){
-            return  cadastroRepository.findAllByMoraSozinho(moraSozinho);
+    public List<Cadastro> buscarCadastros(Boolean moraSozinho, Boolean temPet, Integer idade) {
+        if (moraSozinho != null) {
+            return cadastroRepository.findAllByMoraSozinho(moraSozinho);
         }
-        if(temPet != null){
+        if (temPet != null) {
             return cadastroRepository.findAllByTemPet(temPet);
         }
-        if(idade != null){
+        if (idade != null) {
             return cadastroRepository.findAllByIdade(idade);
         }
         Iterable<Cadastro> cadastros = cadastroRepository.findAll();
         return (List<Cadastro>) cadastros;
+
     }
 
-
+    public void deletarCadastro(String cpf) {
+        cadastroRepository.deleteById(cpf);
+    }
 
 }
