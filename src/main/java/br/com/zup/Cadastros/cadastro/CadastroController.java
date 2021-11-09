@@ -1,5 +1,6 @@
 package br.com.zup.Cadastros.cadastro;
 
+import org.hibernate.validator.constraints.br.CPF;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,7 +42,7 @@ public class CadastroController {
 
     @DeleteMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deletarCadastro(@PathVariable String cpf){
+    public void deletarCadastro(@PathVariable @CPF String cpf){
         cadastroService.deletarCadastro(cpf);
     }
 
