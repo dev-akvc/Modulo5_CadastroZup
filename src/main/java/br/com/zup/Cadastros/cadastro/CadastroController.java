@@ -1,5 +1,6 @@
 package br.com.zup.Cadastros.cadastro;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -11,20 +12,14 @@ import javax.validation.Valid;
 public class CadastroController {
     @Autowired
     private CadastroService cadastroService;
+    @Autowired
+    private ModelMapper modelMapper;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void cadastrarPessoa(@RequestBody @Valid CadastroDTO cadastroDTO) {
-        Cadastro cadastro = new Cadastro();
-        cadastro.setCpf(cadastroDTO.getCpf());
-        cadastro.setNome(cadastroDTO.getNome());
-        cadastro.setSobrenome(cadastroDTO.getSobrenome());
-        cadastro.setCidade(cadastroDTO.getCidade());
-        cadastro.setBairro(cadastroDTO.getBairro());
-        cadastro.setNomeDoParenteProximo(cadastroDTO.getNomeDoParenteProximo());
-        cadastro.setMoraSozinho(cadastroDTO.isMoraSozinho());
-        cadastro.setTemPet(cadastroDTO.isTemPet());
-        cadastro.setIdade(cadastroDTO.getIdade());
+        Cadastro cadastro = modelMapper.map(cadastroDTO, Cadastro.class);
+
         cadastroService.cadastrarPessoa(cadastro);
     }
 
