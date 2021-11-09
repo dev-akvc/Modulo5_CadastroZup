@@ -46,4 +46,9 @@ public class CadastroController {
         cadastroService.deletarCadastro(cpf);
     }
 
+    @GetMapping("/{cpf}")
+    public Cadastro pesquisarCadastroPorId(@PathVariable String cpf){
+        return cadastroService.pesquisarCadastroPorId(cpf);
+    }
+
 }
